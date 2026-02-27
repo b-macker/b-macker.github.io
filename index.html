@@ -2,10 +2,231 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=https://b-macker.github.io/NAAb/">
-    <title>Redirecting to NAAb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAAb Ecosystem - Brandon Mackert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .ecosystem-badge {
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .projects {
+            display: grid;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .project:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .project h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .project .subtitle {
+            color: #764ba2;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .project .features {
+            list-style: none;
+            margin: 15px 0;
+            padding-left: 0;
+        }
+
+        .project .features li {
+            padding: 5px 0;
+            color: #666;
+        }
+
+        .project .features li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f5ff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            color: #666;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="https://b-macker.github.io/NAAb/">NAAb</a>...</p>
+    <div class="container">
+        <header>
+            <h1>NAAb Ecosystem</h1>
+            <p class="tagline">Polyglot programming without the trip</p>
+            <span class="ecosystem-badge">3 Production-Ready Projects</span>
+        </header>
+
+        <div class="projects">
+            <div class="project">
+                <h2>NAAb Language</h2>
+                <p class="subtitle">Core polyglot scripting language</p>
+                <p>A polyglot programming language that seamlessly integrates Python, JavaScript, Rust, C++, Go, and more through an innovative block system. Use the best language for each task — in a single file.</p>
+                <ul class="features">
+                    <li>9 languages: Python, JavaScript, Rust, C++, Go, C#, Ruby, PHP, Shell</li>
+                    <li>Modern features: Pattern matching, async/await, lambdas, closures</li>
+                    <li>Built-in LLM governance engine</li>
+                    <li>325 tests passing across 12 stdlib modules</li>
+                </ul>
+                <div class="links">
+                    <a href="https://github.com/b-macker/NAAb" class="btn btn-primary">View on GitHub</a>
+                    <a href="https://github.com/b-macker/NAAb#quick-start" class="btn btn-secondary">Quick Start</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <h2>NAAb BOLO</h2>
+                <p class="subtitle">Polyglot code executor and validator</p>
+                <p>"Be On the Lookout" for bad code. Enterprise LLM & AI governance platform built 100% in NAAb. 50+ static analysis checks, 5 governance profiles, SARIF/HTML/JSON/CSV/JUnit reports.</p>
+                <ul class="features">
+                    <li>50+ checks: LLM anti-drift, security, AI governance, code quality</li>
+                    <li>7 enforcement gates with stage-based validation</li>
+                    <li>C++ pattern matching engine (50x faster than Python)</li>
+                    <li>Python report generation and tool orchestration</li>
+                </ul>
+                <div class="links">
+                    <a href="https://github.com/b-macker/naab-bolo" class="btn btn-primary">View on GitHub</a>
+                    <a href="https://github.com/b-macker/naab-bolo#quick-start" class="btn btn-secondary">Quick Start</a>
+                </div>
+            </div>
+
+            <div class="project">
+                <h2>NAAb Pivot</h2>
+                <p class="subtitle">Code evolution and optimization platform</p>
+                <p>Automatically analyze slow code, generate optimized versions in compiled languages, and prove correctness with statistical parity validation. Get 3-60x speedups with 99.99% confidence.</p>
+                <ul class="features">
+                    <li>8 target languages: Go, C++, Rust, Ruby, JS, PHP, Zig, Julia</li>
+                    <li>10 real-world examples with proven speedups (3-60x faster)</li>
+                    <li>Statistical parity validation (99.99% confidence)</li>
+                    <li>Web dashboard with performance visualization</li>
+                </ul>
+                <div class="links">
+                    <a href="https://github.com/b-macker/naab-pivot" class="btn btn-primary">View on GitHub</a>
+                    <a href="https://github.com/b-macker/naab-pivot/releases/tag/v1.0.0" class="btn btn-secondary">v1.0.0 Release</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Brandon Mackert</strong> - <a href="https://github.com/b-macker">@b-macker</a></p>
+            <p style="margin-top: 10px; font-size: 0.9em;">MIT License - All projects open source</p>
+        </footer>
+    </div>
 </body>
 </html>
