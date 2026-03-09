@@ -75,12 +75,11 @@
             font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--text-primary);
             text-decoration: none;
         }
+
+        .nav-logo span { color: var(--accent); }
 
         .nav-links { display: flex; gap: 28px; list-style: none; }
 
@@ -862,7 +861,7 @@
 <!-- NAV -->
 <nav>
     <div class="nav-inner">
-        <a href="#" class="nav-logo">NAAb</a>
+        <a href="https://b-macker.github.io/" class="nav-logo">N<span>AAb</span></a>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
