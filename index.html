@@ -414,6 +414,258 @@
             line-height: 1.5;
         }
 
+        /* ── PROCESS FLOW ── */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 32px;
+            right: -2px;
+            width: calc(100%);
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .process-step:last-child::after { display: none; }
+
+        .process-num {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-num.step-1 { background: rgba(59, 130, 246, 0.15); color: var(--accent); border: 2px solid rgba(59, 130, 246, 0.3); }
+        .process-num.step-2 { background: rgba(245, 158, 11, 0.15); color: var(--orange); border: 2px solid rgba(245, 158, 11, 0.3); }
+        .process-num.step-3 { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 2px solid rgba(16, 185, 129, 0.3); }
+        .process-num.step-4 { background: rgba(139, 92, 246, 0.15); color: var(--accent-secondary); border: 2px solid rgba(139, 92, 246, 0.3); }
+
+        .process-step h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── GOVERNANCE DEEP DIVE ── */
+        .gov-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gov-panel {
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gov-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .gov-panel.without {
+            background: rgba(239, 68, 68, 0.03);
+        }
+
+        .gov-panel.without::before {
+            background: linear-gradient(90deg, var(--red), var(--orange));
+        }
+
+        .gov-panel.with {
+            background: rgba(16, 185, 129, 0.03);
+        }
+
+        .gov-panel.with::before {
+            background: linear-gradient(90deg, var(--green), var(--cyan));
+        }
+
+        .gov-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .gov-panel-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .gov-panel.without .gov-panel-icon {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .gov-panel.with .gov-panel-icon {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .gov-panel-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .gov-panel.without .gov-panel-header h3 { color: var(--red); }
+        .gov-panel.with .gov-panel-header h3 { color: var(--green); }
+
+        .gov-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .gov-item:last-child { border-bottom: none; }
+
+        .gov-item-icon {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-top: 2px;
+        }
+
+        .gov-panel.without .gov-item-icon {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red);
+        }
+
+        .gov-panel.with .gov-item-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+        }
+
+        /* ── GOVERNANCE CONFIG PREVIEW ── */
+        .gov-config-section {
+            margin-top: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gov-config-label {
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* ── AI DRIFT CALLOUT ── */
+        .drift-callout {
+            max-width: 900px;
+            margin: 64px auto 0;
+            padding: 40px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+            border: 1px solid var(--border-highlight);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drift-callout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary), var(--cyan));
+        }
+
+        .drift-callout h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .drift-callout p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .drift-callout p:last-child { margin-bottom: 0; }
+
+        .drift-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+        .drift-stat {
+            text-align: center;
+        }
+
+        .drift-stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .drift-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
         /* ── ECOSYSTEM PROJECTS ── */
         .ecosystem-grid {
             display: grid;
@@ -590,6 +842,10 @@
             .ecosystem-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .hero { min-height: auto; padding: 140px 24px 60px; }
+            .process-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .process-step::after { display: none; }
+            .gov-compare { grid-template-columns: 1fr; }
+            .drift-stats { grid-template-columns: 1fr; gap: 16px; }
         }
 
         @media (max-width: 480px) {
@@ -597,6 +853,7 @@
             .stat { padding: 20px 12px; }
             .stat-value { font-size: 1.6rem; }
             .hero-buttons { flex-direction: column; align-items: center; }
+            .process-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -608,6 +865,8 @@
         <a href="#" class="nav-logo">NAAb</a>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#governance">Governance</a></li>
             <li><a href="#ecosystem">Ecosystem</a></li>
             <li><a href="https://b-macker.github.io/NAAb/">Docs</a></li>
             <li><a href="https://github.com/b-macker/NAAb">GitHub</a></li>
@@ -750,6 +1009,164 @@
                 <div class="feature-icon red">&#9733;</div>
                 <h3>Modern Syntax</h3>
                 <p>Lambdas, closures, pattern matching, if-expressions, pipeline operators. Familiar yet powerful.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+    <div class="section-inner">
+        <p class="section-label reveal">How It Works</p>
+        <h2 class="section-title reveal">From idea to governed execution in four steps</h2>
+        <p class="section-desc reveal">NAAb doesn't replace your favorite languages. It orchestrates them &mdash; with rules that prevent drift before code ever runs.</p>
+
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="process-num step-1">1</div>
+                <h3>Write</h3>
+                <p>One <code>.naab</code> file. Use the best language for each task &mdash; Python for parsing, Go for concurrency, Shell for file ops. No boilerplate, no glue code.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-1">
+                <div class="process-num step-2">2</div>
+                <h3>Govern</h3>
+                <p>A <code>govern.json</code> locks the rules. Allowed languages, banned functions, timeouts, line limits. AI can't drift outside the boundaries you set.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-2">
+                <div class="process-num step-3">3</div>
+                <h3>Execute</h3>
+                <p>Each block runs in its native runtime. Python in Python, Rust compiled to binary, Go in Go. Real performance, real ecosystems &mdash; not transpilation.</p>
+            </div>
+            <div class="process-step reveal reveal-delay-3">
+                <div class="process-num step-4">4</div>
+                <h3>Ship</h3>
+                <p>Governance reports, audit trails, SARIF output. Every execution is validated against your rules. What passed, what was blocked, and why.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY GOVERNANCE -->
+<section id="governance">
+    <div class="section-inner">
+        <p class="section-label reveal">AI Governance</p>
+        <h2 class="section-title reveal">Control at the language level, not the prompt level</h2>
+        <p class="section-desc reveal">Prompt engineering is a suggestion. Governance is a constraint. NAAb enforces rules where they can't be bypassed &mdash; in the runtime itself.</p>
+
+        <div class="gov-compare">
+            <div class="gov-panel without reveal">
+                <div class="gov-panel-header">
+                    <div class="gov-panel-icon">&#10005;</div>
+                    <h3>Without NAAb</h3>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#8594;</div>
+                    <span>AI hallucinates a <code>pandas.fast_merge()</code> that doesn't exist. Code ships. Fails in production.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#8594;</div>
+                    <span>Prompt says "use Go for performance." AI writes it in Python anyway. No enforcement.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#8594;</div>
+                    <span>AI generates <code>eval()</code>, <code>exec()</code>, or <code>subprocess.call()</code>. Security review catches it &mdash; weeks later.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#8594;</div>
+                    <span>Each AI session drifts differently. No two outputs follow the same standards. Consistency is manual.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#8594;</div>
+                    <span>Linters catch style. Nobody catches logic &mdash; stubs that return hardcoded values, incomplete error handling.</span>
+                </div>
+            </div>
+
+            <div class="gov-panel with reveal reveal-delay-1">
+                <div class="gov-panel-header">
+                    <div class="gov-panel-icon">&#10003;</div>
+                    <h3>With NAAb Governance</h3>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#10003;</div>
+                    <span>50+ checks validate imports, function calls, and patterns before execution. Hallucinated APIs are blocked at runtime.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#10003;</div>
+                    <span><code>govern.json</code> whitelists languages per project. Python block in a Go-only project? Hard block. Not a suggestion.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#10003;</div>
+                    <span>Banned function lists enforced per language. <code>eval</code> in JS? Blocked. <code>os.system</code> in Python? Blocked. Before it runs.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#10003;</div>
+                    <span>Every AI session produces code governed by the same <code>govern.json</code>. Same rules, same boundaries, every time.</span>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-item-icon">&#10003;</div>
+                    <span>Code quality checks detect stubs, TODO placeholders, and oversimplified logic. Three enforcement tiers: hard, soft, advisory.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- govern.json preview -->
+        <div class="gov-config-section reveal">
+            <p class="gov-config-label">One config file controls everything</p>
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-dot red"></div>
+                    <div class="code-dot yellow"></div>
+                    <div class="code-dot green"></div>
+                    <span class="code-filename">govern.json</span>
+                </div>
+                <div class="code-body">
+<span class="op">{</span><br>
+&nbsp;&nbsp;<span class="str">"languages"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"allowed"</span>: [<span class="str">"python"</span>, <span class="str">"go"</span>, <span class="str">"shell"</span>],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"enforcement"</span>: <span class="str">"hard"</span> &nbsp;<span class="cm">// blocked, not warned</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="str">"restrictions"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"banned_functions"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"python"</span>: [<span class="str">"eval"</span>, <span class="str">"exec"</span>, <span class="str">"__import__"</span>],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"javascript"</span>: [<span class="str">"eval"</span>, <span class="str">"Function"</span>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="str">"limits"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"max_lines_per_block"</span>: <span class="fn">100</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"timeout_seconds"</span>: <span class="fn">30</span><br>
+&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;<span class="str">"code_quality"</span>: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"detect_stubs"</span>: <span class="kw">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"detect_todos"</span>: <span class="kw">true</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"enforcement"</span>: <span class="str">"soft"</span> &nbsp;<span class="cm">// block with override</span><br>
+&nbsp;&nbsp;}<br>
+<span class="op">}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Drift Callout -->
+        <div class="drift-callout reveal">
+            <h3>Why this matters for AI-generated code</h3>
+            <p>Large language models don't follow rules &mdash; they follow patterns. Every prompt is a new session with no memory of your standards. The result: <strong>drift</strong>. Each generation diverges further from your codebase conventions, security requirements, and architectural decisions.</p>
+            <p>NAAb moves governance from the prompt layer (where it's a suggestion) to the runtime layer (where it's enforced). The AI can generate whatever it wants. <code>govern.json</code> decides what actually runs. This isn't about limiting AI &mdash; it's about giving it a sandbox with hard walls instead of soft guidelines.</p>
+            <div class="drift-stats">
+                <div class="drift-stat">
+                    <div class="drift-stat-value">50+</div>
+                    <div class="drift-stat-label">governance checks per execution</div>
+                </div>
+                <div class="drift-stat">
+                    <div class="drift-stat-value">3-tier</div>
+                    <div class="drift-stat-label">enforcement: hard / soft / advisory</div>
+                </div>
+                <div class="drift-stat">
+                    <div class="drift-stat-value">0</div>
+                    <div class="drift-stat-label">hallucinated APIs reach production</div>
+                </div>
             </div>
         </div>
     </div>
