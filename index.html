@@ -15,229 +15,843 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="NAAb Ecosystem - Polyglot Programming Language">
     <meta name="twitter:description" content="A polyglot programming language integrating 12 languages with built-in LLM governance. Use the best language for each task — in a single file.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-deep: #0a0e17;
+            --bg-surface: #111827;
+            --bg-card: #1a2233;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --accent-secondary: #8b5cf6;
+            --green: #10b981;
+            --cyan: #06b6d4;
+            --orange: #f59e0b;
+            --red: #ef4444;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+            --border-highlight: #2d3a4f;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            color: var(--text-primary);
+            background: var(--bg-deep);
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 900px;
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
             margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header {
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            margin-bottom: 50px;
+            padding: 120px 24px 80px;
+            position: relative;
         }
 
-        h1 {
-            font-size: 3em;
-            color: #667eea;
-            margin-bottom: 10px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        .tagline {
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 20px;
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
         }
 
-        .ecosystem-badge {
+        .hero-badge {
             display: inline-block;
-            background: #764ba2;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
+            padding: 6px 16px;
+            border: 1px solid var(--border-highlight);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 32px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .projects {
-            display: grid;
-            gap: 30px;
-            margin-top: 40px;
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
         }
 
-        .project {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 30px;
-            transition: all 0.3s ease;
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 50%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .project:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
-            transform: translateY(-5px);
+        .hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
         }
 
-        .project h2 {
-            color: #667eea;
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .project .subtitle {
-            color: #764ba2;
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .project p {
-            color: #555;
-            margin-bottom: 20px;
-            font-size: 1.05em;
-        }
-
-        .project .features {
-            list-style: none;
-            margin: 15px 0;
-            padding-left: 0;
-        }
-
-        .project .features li {
-            padding: 5px 0;
-            color: #666;
-        }
-
-        .project .features li:before {
-            content: "→ ";
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .links {
-            margin-top: 20px;
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-right: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: #667eea;
+            background: var(--accent);
             color: white;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
         }
 
         .btn-primary:hover {
-            background: #5568d3;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
         }
 
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-highlight);
         }
 
-        .btn-secondary:hover {
-            background: #f5f5ff;
+        .btn-outline:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.05);
         }
 
-        footer {
+        /* ── LANGUAGE TICKER ── */
+        .ticker-section {
+            padding: 0 24px 80px;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid #e0e0e0;
-            color: #666;
         }
 
-        footer a {
-            color: #667eea;
+        .ticker-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .ticker {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ticker span {
+            padding: 8px 18px;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .ticker span:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* ── CODE PREVIEW ── */
+        .code-section {
+            padding: 0 24px 100px;
+        }
+
+        .code-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ef4444; }
+        .code-dot.yellow { background: #f59e0b; }
+        .code-dot.green { background: #10b981; }
+
+        .code-filename {
+            margin-left: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .code-body {
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-body .kw { color: var(--accent-secondary); }
+        .code-body .fn { color: var(--accent); }
+        .code-body .str { color: var(--green); }
+        .code-body .cm { color: var(--text-muted); font-style: italic; }
+        .code-body .lang { color: var(--cyan); }
+        .code-body .op { color: var(--orange); }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 48px;
+        }
+
+        /* ── STATS ── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 0 24px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 32px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-surface);
+            transition: border-color 0.3s;
+        }
+
+        .stat:hover { border-color: var(--border-highlight); }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ── FEATURE CARDS (NAAb Language Features) ── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-surface);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-highlight);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-icon.blue { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .feature-icon.purple { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.2); }
+        .feature-icon.green { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .feature-icon.cyan { background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); }
+        .feature-icon.orange { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2); }
+        .feature-icon.red { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ── ECOSYSTEM PROJECTS ── */
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .eco-card {
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-surface);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eco-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .eco-card.bolo::before { background: linear-gradient(90deg, var(--accent), var(--green)); }
+        .eco-card.pivot::before { background: linear-gradient(90deg, var(--orange), var(--red)); }
+        .eco-card.passage::before { background: linear-gradient(90deg, var(--accent-secondary), var(--cyan)); }
+
+        .eco-card:hover {
+            border-color: var(--border-highlight);
+            transform: translateY(-4px);
+        }
+
+        .eco-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .eco-tag.governance { background: rgba(16, 185, 129, 0.1); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .eco-tag.performance { background: rgba(245, 158, 11, 0.1); color: var(--orange); border: 1px solid rgba(245, 158, 11, 0.2); }
+        .eco-tag.security { background: rgba(139, 92, 246, 0.1); color: var(--accent-secondary); border: 1px solid rgba(139, 92, 246, 0.2); }
+
+        .eco-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .eco-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .eco-stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .eco-stat {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .eco-stat strong {
+            color: var(--text-primary);
+        }
+
+        .eco-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .eco-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .eco-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ── DIVIDER ── */
+        .divider {
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-highlight), transparent);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 60px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-credit {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-credit a {
+            color: var(--text-secondary);
             text-decoration: none;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .footer-credit a:hover { color: var(--accent); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+            .ecosystem-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero { min-height: auto; padding: 140px 24px 60px; }
+        }
+
+        @media (max-width: 480px) {
+            .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .stat { padding: 20px 12px; }
+            .stat-value { font-size: 1.6rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>NAAb Ecosystem</h1>
-            <p class="tagline">Polyglot programming without the trip</p>
-            <span class="ecosystem-badge">3 Production-Ready Projects</span>
-        </header>
 
-        <div class="projects">
-            <div class="project">
-                <h2>NAAb Language</h2>
-                <p class="subtitle">Core polyglot scripting language</p>
-                <p>A polyglot programming language that seamlessly integrates Python, JavaScript, Rust, C++, Go, and more through an innovative block system. Use the best language for each task — in a single file.</p>
-                <ul class="features">
-                    <li>9 languages: Python, JavaScript, Rust, C++, Go, C#, Ruby, PHP, Shell</li>
-                    <li>Modern features: Pattern matching, async/await, lambdas, closures</li>
-                    <li>Built-in LLM governance engine</li>
-                    <li>325 tests passing across 12 stdlib modules</li>
-                </ul>
-                <div class="links">
-                    <a href="https://github.com/b-macker/NAAb" class="btn btn-primary">View on GitHub</a>
-                    <a href="https://github.com/b-macker/NAAb#quick-start" class="btn btn-secondary">Quick Start</a>
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">NAAb</a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#ecosystem">Ecosystem</a></li>
+            <li><a href="https://b-macker.github.io/NAAb/">Docs</a></li>
+            <li><a href="https://github.com/b-macker/NAAb">GitHub</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">Open Source &middot; MIT License</div>
+        <h1>
+            <span class="gradient-text">The polyglot language</span><br>
+            built for the AI era
+        </h1>
+        <p class="hero-sub">
+            Write Python, JavaScript, Rust, C++ and 8 more languages in a single file.
+            Built-in governance catches hallucinated APIs and incomplete logic before they ship.
+        </p>
+        <div class="hero-buttons">
+            <a href="https://b-macker.github.io/NAAb/" class="btn btn-primary">Get Started</a>
+            <a href="https://github.com/b-macker/NAAb" class="btn btn-outline">View on GitHub</a>
+        </div>
+    </div>
+</section>
+
+<!-- LANGUAGE TICKER -->
+<div class="ticker-section">
+    <p class="ticker-label">12 Languages, One File</p>
+    <div class="ticker">
+        <span>Python</span>
+        <span>JavaScript</span>
+        <span>Rust</span>
+        <span>C++</span>
+        <span>Go</span>
+        <span>C#</span>
+        <span>Ruby</span>
+        <span>PHP</span>
+        <span>Shell</span>
+        <span>Nim</span>
+        <span>Zig</span>
+        <span>Julia</span>
+    </div>
+</div>
+
+<!-- CODE PREVIEW -->
+<div class="code-section reveal">
+    <div class="code-container">
+        <div class="code-header">
+            <div class="code-dot red"></div>
+            <div class="code-dot yellow"></div>
+            <div class="code-dot green"></div>
+            <span class="code-filename">pipeline.naab</span>
+        </div>
+        <div class="code-body">
+<span class="kw">use</span> array<br>
+<br>
+<span class="kw">main</span> {<br>
+&nbsp;&nbsp;<span class="cm">// Find files with shell — it's what shell is for</span><br>
+&nbsp;&nbsp;<span class="kw">let</span> files <span class="op">=</span> <span class="lang">&lt;&lt;shell</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;find . -name "*.csv" -type f<br>
+&nbsp;&nbsp;<span class="lang">&gt;&gt;</span><br>
+<br>
+&nbsp;&nbsp;<span class="cm">// Parse CSV with Python — rich ecosystem</span><br>
+&nbsp;&nbsp;<span class="kw">let</span> data <span class="op">=</span> <span class="lang">&lt;&lt;python</span>[files]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import csv, json<br>
+&nbsp;&nbsp;&nbsp;&nbsp;rows = list(csv.DictReader(open(files.strip())))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print(json.dumps(rows))<br>
+&nbsp;&nbsp;<span class="lang">&gt;&gt;</span><br>
+<br>
+&nbsp;&nbsp;<span class="cm">// Crunch numbers with Julia — 100x faster math</span><br>
+&nbsp;&nbsp;<span class="kw">let</span> stats <span class="op">=</span> <span class="lang">&lt;&lt;julia</span>[data]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;using Statistics<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vals = parse.(Float64, split(data, ","))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;println("mean=$(mean(vals)) std=$(std(vals))")<br>
+&nbsp;&nbsp;<span class="lang">&gt;&gt;</span><br>
+<br>
+&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">"Results: "</span> + stats)<br>
+}
+        </div>
+    </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stat reveal">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Languages</div>
+    </div>
+    <div class="stat reveal reveal-delay-1">
+        <div class="stat-value">15k+</div>
+        <div class="stat-label">Lines of C++17</div>
+    </div>
+    <div class="stat reveal reveal-delay-2">
+        <div class="stat-value">50+</div>
+        <div class="stat-label">Governance Checks</div>
+    </div>
+    <div class="stat reveal reveal-delay-3">
+        <div class="stat-value">325</div>
+        <div class="stat-label">Tests Passing</div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+    <div class="section-inner">
+        <p class="section-label reveal">Core Language</p>
+        <h2 class="section-title reveal">Use the right tool for every job</h2>
+        <p class="section-desc reveal">NAAb's block system lets each piece of your program run in its optimal language while maintaining seamless data flow.</p>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon blue">&#9672;</div>
+                <h3>Polyglot Blocks</h3>
+                <p>Inline Python, JS, Rust, C++, Go and 7 more languages. Variables flow automatically between blocks.</p>
+            </div>
+            <div class="feature-card reveal reveal-delay-1">
+                <div class="feature-icon purple">&#9670;</div>
+                <h3>LLM Governance</h3>
+                <p>50+ checks catch hallucinated APIs, oversimplified stubs, and incomplete logic in AI-generated code.</p>
+            </div>
+            <div class="feature-card reveal reveal-delay-2">
+                <div class="feature-icon green">&#9654;</div>
+                <h3>Parallel Execution</h3>
+                <p>Independent polyglot blocks run concurrently. Dependency analysis ensures correct ordering automatically.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon cyan">&#10697;</div>
+                <h3>12 Stdlib Modules</h3>
+                <p>Array, string, math, file, HTTP, JSON, env, debug and more. 325 tests passing across all modules.</p>
+            </div>
+            <div class="feature-card reveal reveal-delay-1">
+                <div class="feature-icon orange">&#9881;</div>
+                <h3>govern.json</h3>
+                <p>Declarative config controls allowed languages, timeouts, banned functions, and code quality rules per project.</p>
+            </div>
+            <div class="feature-card reveal reveal-delay-2">
+                <div class="feature-icon red">&#9733;</div>
+                <h3>Modern Syntax</h3>
+                <p>Lambdas, closures, pattern matching, if-expressions, pipeline operators. Familiar yet powerful.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM -->
+<section id="ecosystem">
+    <div class="section-inner">
+        <p class="section-label reveal">Ecosystem</p>
+        <h2 class="section-title reveal">Tools built on NAAb</h2>
+        <p class="section-desc reveal">Production-ready companions that extend polyglot programming into governance, optimization, and security.</p>
+
+        <div class="ecosystem-grid">
+            <div class="eco-card bolo reveal">
+                <span class="eco-tag governance">Governance</span>
+                <h3>NAAb BOLO</h3>
+                <p>Be on the lookout for bad code. Scans your codebase for hallucinated APIs, oversimplified stubs, security vulnerabilities, and incomplete logic &mdash; catching what code review misses.</p>
+                <div class="eco-stats">
+                    <span class="eco-stat"><strong>50+</strong> checks</span>
+                    <span class="eco-stat"><strong>5</strong> profiles</span>
+                    <span class="eco-stat"><strong>4</strong> report formats</span>
+                    <span class="eco-stat"><strong>64</strong> regression tests</span>
+                </div>
+                <div class="eco-links">
+                    <a href="https://github.com/b-macker/naab-bolo" class="eco-link">GitHub</a>
+                    <a href="https://b-macker.github.io/naab-bolo/" class="eco-link">Learn More</a>
                 </div>
             </div>
 
-            <div class="project">
-                <h2>NAAb BOLO</h2>
-                <p class="subtitle">Polyglot code executor and validator</p>
-                <p>"Be On the Lookout" for bad code. Enterprise LLM & AI governance platform built 100% in NAAb. 50+ static analysis checks, 5 governance profiles, SARIF/HTML/JSON/CSV/JUnit reports.</p>
-                <ul class="features">
-                    <li>50+ checks: LLM anti-drift, security, AI governance, code quality</li>
-                    <li>7 enforcement gates with stage-based validation</li>
-                    <li>C++ pattern matching engine (50x faster than Python)</li>
-                    <li>Python report generation and tool orchestration</li>
-                </ul>
-                <div class="links">
-                    <a href="https://github.com/b-macker/naab-bolo" class="btn btn-primary">View on GitHub</a>
-                    <a href="https://github.com/b-macker/naab-bolo#quick-start" class="btn btn-secondary">Quick Start</a>
+            <div class="eco-card pivot reveal reveal-delay-1">
+                <span class="eco-tag performance">Performance</span>
+                <h3>NAAb Pivot</h3>
+                <p>Rewrite slow code, prove it's correct. Analyzes Python, Ruby, or JavaScript hotspots, generates optimized Go, Rust, or C++ &mdash; and mathematically proves the results are identical.</p>
+                <div class="eco-stats">
+                    <span class="eco-stat"><strong>3-60x</strong> speedups</span>
+                    <span class="eco-stat"><strong>8</strong> target languages</span>
+                    <span class="eco-stat"><strong>99.99%</strong> confidence</span>
+                    <span class="eco-stat"><strong>10</strong> proven examples</span>
+                </div>
+                <div class="eco-links">
+                    <a href="https://github.com/b-macker/naab-pivot" class="eco-link">GitHub</a>
+                    <a href="https://b-macker.github.io/naab-pivot/" class="eco-link">Learn More</a>
                 </div>
             </div>
 
-            <div class="project">
-                <h2>NAAb Pivot</h2>
-                <p class="subtitle">Code evolution and optimization platform</p>
-                <p>Automatically analyze slow code, generate optimized versions in compiled languages, and prove correctness with statistical parity validation. Get 3-60x speedups with 99.99% confidence.</p>
-                <ul class="features">
-                    <li>8 target languages: Go, C++, Rust, Ruby, JS, PHP, Zig, Julia</li>
-                    <li>10 real-world examples with proven speedups (3-60x faster)</li>
-                    <li>Statistical parity validation (99.99% confidence)</li>
-                    <li>Web dashboard with performance visualization</li>
-                </ul>
-                <div class="links">
-                    <a href="https://github.com/b-macker/naab-pivot" class="btn btn-primary">View on GitHub</a>
-                    <a href="https://github.com/b-macker/naab-pivot/releases/tag/v1.0.0" class="btn btn-secondary">v1.0.0 Release</a>
+            <div class="eco-card passage reveal reveal-delay-2">
+                <span class="eco-tag security">Security</span>
+                <h3>NAAb Passage</h3>
+                <p>Sovereign data gateway. Zero PII leakage to LLMs, APIs, or third-party services. Self-synthesizing worker binaries with SHA-256 verification and forensic shredding on shutdown.</p>
+                <div class="eco-stats">
+                    <span class="eco-stat"><strong>100%</strong> detection</span>
+                    <span class="eco-stat"><strong>&lt;0.01%</strong> false positives</span>
+                    <span class="eco-stat"><strong>HIPAA</strong> / <strong>GDPR</strong> / <strong>SOC2</strong></span>
+                </div>
+                <div class="eco-links">
+                    <a href="https://github.com/b-macker/naab-passage" class="eco-link">GitHub</a>
+                    <a href="https://b-macker.github.io/naab-passage/" class="eco-link">Learn More</a>
                 </div>
             </div>
         </div>
-
-        <footer>
-            <p><strong>Brandon Mackert</strong> - <a href="https://github.com/b-macker">@b-macker</a></p>
-            <p style="margin-top: 10px; font-size: 0.9em;">MIT License - All projects open source</p>
-        </footer>
     </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-links">
+            <a href="https://b-macker.github.io/NAAb/">Documentation</a>
+            <a href="https://github.com/b-macker/NAAb">GitHub</a>
+            <a href="https://github.com/b-macker/NAAb#quick-start">Quick Start</a>
+            <a href="https://github.com/b-macker/NAAb/blob/master/LICENSE">MIT License</a>
+        </div>
+        <p class="footer-credit">
+            Built by <a href="https://github.com/b-macker">Brandon Mackert</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav background on scroll
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        nav.style.background = 'rgba(10, 14, 23, 0.95)';
+    } else {
+        nav.style.background = 'rgba(10, 14, 23, 0.85)';
+    }
+});
+</script>
+
 </body>
 </html>
