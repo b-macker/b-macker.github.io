@@ -876,14 +876,14 @@
 <!-- HERO -->
 <section class="hero">
     <div class="hero-content">
-        <div class="hero-badge">Open Source &middot; MIT License</div>
+        <div class="hero-badge">The only language with built-in AI governance</div>
         <h1>
-            <span class="gradient-text">The polyglot language</span><br>
-            built for the AI era
+            <span class="gradient-text">Stop AI drift</span><br>
+            at the language level
         </h1>
         <p class="hero-sub">
-            Write Python, JavaScript, Rust, C++ and 8 more languages in a single file.
-            Built-in governance catches hallucinated APIs and incomplete logic before they ship.
+            NAAb is the first programming language where governance is a runtime constraint, not a suggestion.
+            A single <code>govern.json</code> enforces what AI-generated code can do &mdash; before it executes.
         </p>
         <div class="hero-buttons">
             <a href="https://b-macker.github.io/NAAb/" class="btn btn-primary">Get Started</a>
@@ -894,7 +894,7 @@
 
 <!-- LANGUAGE TICKER -->
 <div class="ticker-section">
-    <p class="ticker-label">12 Languages, One File</p>
+    <p class="ticker-label">12 languages governed by one config</p>
     <div class="ticker">
         <span>Python</span>
         <span>JavaScript</span>
@@ -918,32 +918,31 @@
             <div class="code-dot red"></div>
             <div class="code-dot yellow"></div>
             <div class="code-dot green"></div>
-            <span class="code-filename">pipeline.naab</span>
+            <span class="code-filename">governed-pipeline.naab</span>
         </div>
         <div class="code-body">
-<span class="kw">use</span> array<br>
+<span class="cm">// govern.json allows: python, shell, go</span><br>
+<span class="cm">// govern.json bans: eval, exec, os.system</span><br>
+<span class="cm">// govern.json requires: no stubs, no TODOs</span><br>
 <br>
 <span class="kw">main</span> {<br>
-&nbsp;&nbsp;<span class="cm">// Find files with shell — it's what shell is for</span><br>
+&nbsp;&nbsp;<span class="cm">// AI generated this — governance validated it</span><br>
 &nbsp;&nbsp;<span class="kw">let</span> files <span class="op">=</span> <span class="lang">&lt;&lt;shell</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;find . -name "*.csv" -type f<br>
 &nbsp;&nbsp;<span class="lang">&gt;&gt;</span><br>
 <br>
-&nbsp;&nbsp;<span class="cm">// Parse CSV with Python — rich ecosystem</span><br>
 &nbsp;&nbsp;<span class="kw">let</span> data <span class="op">=</span> <span class="lang">&lt;&lt;python</span>[files]<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import csv, json<br>
 &nbsp;&nbsp;&nbsp;&nbsp;rows = list(csv.DictReader(open(files.strip())))<br>
 &nbsp;&nbsp;&nbsp;&nbsp;print(json.dumps(rows))<br>
 &nbsp;&nbsp;<span class="lang">&gt;&gt;</span><br>
 <br>
-&nbsp;&nbsp;<span class="cm">// Crunch numbers with Julia — 100x faster math</span><br>
-&nbsp;&nbsp;<span class="kw">let</span> stats <span class="op">=</span> <span class="lang">&lt;&lt;julia</span>[data]<br>
-&nbsp;&nbsp;&nbsp;&nbsp;using Statistics<br>
-&nbsp;&nbsp;&nbsp;&nbsp;vals = parse.(Float64, split(data, ","))<br>
-&nbsp;&nbsp;&nbsp;&nbsp;println("mean=$(mean(vals)) std=$(std(vals))")<br>
+&nbsp;&nbsp;<span class="kw">let</span> result <span class="op">=</span> <span class="lang">&lt;&lt;go</span>[data]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(processData(data))<br>
 &nbsp;&nbsp;<span class="lang">&gt;&gt;</span><br>
 <br>
-&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">"Results: "</span> + stats)<br>
+&nbsp;&nbsp;<span class="fn">print</span>(result)<br>
+&nbsp;&nbsp;<span class="cm">// ✓ 3 blocks validated, 0 violations, 0 hallucinations</span><br>
 }
         </div>
     </div>
@@ -952,16 +951,16 @@
 <!-- STATS -->
 <div class="stats">
     <div class="stat reveal">
-        <div class="stat-value">12</div>
-        <div class="stat-label">Languages</div>
-    </div>
-    <div class="stat reveal reveal-delay-1">
-        <div class="stat-value">15k+</div>
-        <div class="stat-label">Lines of C++17</div>
-    </div>
-    <div class="stat reveal reveal-delay-2">
         <div class="stat-value">50+</div>
         <div class="stat-label">Governance Checks</div>
+    </div>
+    <div class="stat reveal reveal-delay-1">
+        <div class="stat-value">3-tier</div>
+        <div class="stat-label">Enforcement</div>
+    </div>
+    <div class="stat reveal reveal-delay-2">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Languages Governed</div>
     </div>
     <div class="stat reveal reveal-delay-3">
         <div class="stat-value">325</div>
@@ -974,40 +973,40 @@
 <!-- FEATURES -->
 <section id="features">
     <div class="section-inner">
-        <p class="section-label reveal">Core Language</p>
-        <h2 class="section-title reveal">Use the right tool for every job</h2>
-        <p class="section-desc reveal">NAAb's block system lets each piece of your program run in its optimal language while maintaining seamless data flow.</p>
+        <p class="section-label reveal">Why NAAb Exists</p>
+        <h2 class="section-title reveal">Every other tool suggests. NAAb enforces.</h2>
+        <p class="section-desc reveal">Linters catch style. SAST catches known CVEs. Nobody catches an AI hallucinating <code>pandas.fast_merge()</code> or shipping a stub that returns hardcoded <code>True</code>. NAAb does.</p>
 
         <div class="features-grid">
             <div class="feature-card reveal">
-                <div class="feature-icon blue">&#9672;</div>
-                <h3>Polyglot Blocks</h3>
-                <p>Inline Python, JS, Rust, C++, Go and 7 more languages. Variables flow automatically between blocks.</p>
-            </div>
-            <div class="feature-card reveal reveal-delay-1">
                 <div class="feature-icon purple">&#9670;</div>
-                <h3>LLM Governance</h3>
-                <p>50+ checks catch hallucinated APIs, oversimplified stubs, and incomplete logic in AI-generated code.</p>
-            </div>
-            <div class="feature-card reveal reveal-delay-2">
-                <div class="feature-icon green">&#9654;</div>
-                <h3>Parallel Execution</h3>
-                <p>Independent polyglot blocks run concurrently. Dependency analysis ensures correct ordering automatically.</p>
-            </div>
-            <div class="feature-card reveal">
-                <div class="feature-icon cyan">&#10697;</div>
-                <h3>12 Stdlib Modules</h3>
-                <p>Array, string, math, file, HTTP, JSON, env, debug and more. 325 tests passing across all modules.</p>
+                <h3>Hallucination Detection</h3>
+                <p>50+ checks catch APIs that don't exist, cross-language mix-ups (<code>.push()</code> in Python), and fabricated function signatures &mdash; before execution.</p>
             </div>
             <div class="feature-card reveal reveal-delay-1">
                 <div class="feature-icon orange">&#9881;</div>
                 <h3>govern.json</h3>
-                <p>Declarative config controls allowed languages, timeouts, banned functions, and code quality rules per project.</p>
+                <p>One config file. Allowed languages, banned functions, line limits, timeout caps, code quality rules. Enforced at the runtime &mdash; not in a PR comment.</p>
             </div>
             <div class="feature-card reveal reveal-delay-2">
                 <div class="feature-icon red">&#9733;</div>
-                <h3>Modern Syntax</h3>
-                <p>Lambdas, closures, pattern matching, if-expressions, pipeline operators. Familiar yet powerful.</p>
+                <h3>Stub &amp; Drift Detection</h3>
+                <p>Catches <code>pass</code>-only functions, TODO placeholders, always-true validators, and identity functions that AI passes off as complete code.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon green">&#9654;</div>
+                <h3>3-Tier Enforcement</h3>
+                <p><strong>Hard</strong>: blocked, no override. <strong>Soft</strong>: blocked with <code>--override</code> flag. <strong>Advisory</strong>: warned, runs anyway. You choose per rule.</p>
+            </div>
+            <div class="feature-card reveal reveal-delay-1">
+                <div class="feature-icon blue">&#9672;</div>
+                <h3>12-Language Runtime</h3>
+                <p>Python, JS, Rust, C++, Go, C#, Ruby, PHP, Shell, Nim, Zig, Julia. Each block runs natively. The right language for each task, governed by one config.</p>
+            </div>
+            <div class="feature-card reveal reveal-delay-2">
+                <div class="feature-icon cyan">&#10697;</div>
+                <h3>Audit Trail</h3>
+                <p>Every execution reports what passed, what was blocked, and why. Export as SARIF, JUnit XML, or JSON. CI/CD ready out of the box.</p>
             </div>
         </div>
     </div>
@@ -1019,29 +1018,29 @@
 <section id="how-it-works">
     <div class="section-inner">
         <p class="section-label reveal">How It Works</p>
-        <h2 class="section-title reveal">From idea to governed execution in four steps</h2>
-        <p class="section-desc reveal">NAAb doesn't replace your favorite languages. It orchestrates them &mdash; with rules that prevent drift before code ever runs.</p>
+        <h2 class="section-title reveal">AI writes the code. You write the rules. NAAb enforces them.</h2>
+        <p class="section-desc reveal">Four steps between AI output and production. The governance layer is not optional &mdash; it's the language.</p>
 
         <div class="process-grid">
             <div class="process-step reveal">
                 <div class="process-num step-1">1</div>
-                <h3>Write</h3>
-                <p>One <code>.naab</code> file. Use the best language for each task &mdash; Python for parsing, Go for concurrency, Shell for file ops. No boilerplate, no glue code.</p>
+                <h3>Define Rules</h3>
+                <p>Drop a <code>govern.json</code> in your project. Whitelist languages, ban dangerous functions, set line limits, require quality checks. This is your single source of truth.</p>
             </div>
             <div class="process-step reveal reveal-delay-1">
                 <div class="process-num step-2">2</div>
-                <h3>Govern</h3>
-                <p>A <code>govern.json</code> locks the rules. Allowed languages, banned functions, timeouts, line limits. AI can't drift outside the boundaries you set.</p>
+                <h3>Generate Code</h3>
+                <p>Use any AI &mdash; ChatGPT, Claude, Copilot, local models. Generate code in any of 12 languages. The AI doesn't need to know about your rules.</p>
             </div>
             <div class="process-step reveal reveal-delay-2">
                 <div class="process-num step-3">3</div>
-                <h3>Execute</h3>
-                <p>Each block runs in its native runtime. Python in Python, Rust compiled to binary, Go in Go. Real performance, real ecosystems &mdash; not transpilation.</p>
+                <h3>NAAb Validates</h3>
+                <p>Before execution, 50+ governance checks run against every code block. Hallucinated APIs, banned functions, stubs, security violations &mdash; caught and blocked.</p>
             </div>
             <div class="process-step reveal reveal-delay-3">
                 <div class="process-num step-4">4</div>
-                <h3>Ship</h3>
-                <p>Governance reports, audit trails, SARIF output. Every execution is validated against your rules. What passed, what was blocked, and why.</p>
+                <h3>Ship with Proof</h3>
+                <p>Audit trail of every check. What passed, what was blocked, why. Export as SARIF for GitHub, JUnit for CI, or JSON for your pipeline.</p>
             </div>
         </div>
     </div>
@@ -1052,62 +1051,62 @@
 <!-- WHY GOVERNANCE -->
 <section id="governance">
     <div class="section-inner">
-        <p class="section-label reveal">AI Governance</p>
-        <h2 class="section-title reveal">Control at the language level, not the prompt level</h2>
-        <p class="section-desc reveal">Prompt engineering is a suggestion. Governance is a constraint. NAAb enforces rules where they can't be bypassed &mdash; in the runtime itself.</p>
+        <p class="section-label reveal">Nothing else does this</p>
+        <h2 class="section-title reveal">The gap in every AI coding workflow</h2>
+        <p class="section-desc reveal">Tools exist for style, syntax, and known CVEs. Nothing enforces code correctness, completeness, and project rules at the language level. Until now.</p>
 
         <div class="gov-compare">
             <div class="gov-panel without reveal">
                 <div class="gov-panel-header">
                     <div class="gov-panel-icon">&#10005;</div>
-                    <h3>Without NAAb</h3>
+                    <h3>What exists today</h3>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#8594;</div>
-                    <span>AI hallucinates a <code>pandas.fast_merge()</code> that doesn't exist. Code ships. Fails in production.</span>
+                    <span><strong>Linters</strong> (ESLint, Pylint) catch style and syntax. They don't know if <code>pandas.fast_merge()</code> is a real API or a hallucination.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#8594;</div>
-                    <span>Prompt says "use Go for performance." AI writes it in Python anyway. No enforcement.</span>
+                    <span><strong>SAST tools</strong> (Semgrep, CodeQL) catch known CVE patterns. They don't catch a stub that returns hardcoded <code>True</code>.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#8594;</div>
-                    <span>AI generates <code>eval()</code>, <code>exec()</code>, or <code>subprocess.call()</code>. Security review catches it &mdash; weeks later.</span>
+                    <span><strong>Guardrails AI / NeMo</strong> validate LLM text responses. They don't validate the <em>code</em> an LLM generates before it runs.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#8594;</div>
-                    <span>Each AI session drifts differently. No two outputs follow the same standards. Consistency is manual.</span>
+                    <span><strong>Prompt engineering</strong> is a suggestion with no memory. Each AI session starts fresh. Your rules are forgotten every time.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#8594;</div>
-                    <span>Linters catch style. Nobody catches logic &mdash; stubs that return hardcoded values, incomplete error handling.</span>
+                    <span><strong>Code review</strong> catches problems days later, if the reviewer knows 12 languages. AI generates faster than humans can review.</span>
                 </div>
             </div>
 
             <div class="gov-panel with reveal reveal-delay-1">
                 <div class="gov-panel-header">
                     <div class="gov-panel-icon">&#10003;</div>
-                    <h3>With NAAb Governance</h3>
+                    <h3>What NAAb does</h3>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#10003;</div>
-                    <span>50+ checks validate imports, function calls, and patterns before execution. Hallucinated APIs are blocked at runtime.</span>
+                    <span><strong>Hallucination blocking.</strong> 50+ checks validate imports, function calls, and APIs against real language specs. Fake APIs never execute.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#10003;</div>
-                    <span><code>govern.json</code> whitelists languages per project. Python block in a Go-only project? Hard block. Not a suggestion.</span>
+                    <span><strong>Completeness enforcement.</strong> Detects stubs, TODO placeholders, <code>pass</code>-only functions, always-true validators. AI can't ship incomplete work.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#10003;</div>
-                    <span>Banned function lists enforced per language. <code>eval</code> in JS? Blocked. <code>os.system</code> in Python? Blocked. Before it runs.</span>
+                    <span><strong>Runtime constraint.</strong> Rules enforced at execution time, not in a PR comment. <code>govern.json</code> is to AI code what Rust's borrow checker is to memory.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#10003;</div>
-                    <span>Every AI session produces code governed by the same <code>govern.json</code>. Same rules, same boundaries, every time.</span>
+                    <span><strong>Session-proof consistency.</strong> Every AI session, every developer, every CI run &mdash; same <code>govern.json</code>, same rules. No drift between sessions.</span>
                 </div>
                 <div class="gov-item">
                     <div class="gov-item-icon">&#10003;</div>
-                    <span>Code quality checks detect stubs, TODO placeholders, and oversimplified logic. Three enforcement tiers: hard, soft, advisory.</span>
+                    <span><strong>Instant enforcement.</strong> Catches problems at execution time, not during review. Blocked code never runs. No waiting, no human bottleneck.</span>
                 </div>
             </div>
         </div>
@@ -1150,9 +1149,9 @@
 
         <!-- AI Drift Callout -->
         <div class="drift-callout reveal">
-            <h3>Why this matters for AI-generated code</h3>
-            <p>Large language models don't follow rules &mdash; they follow patterns. Every prompt is a new session with no memory of your standards. The result: <strong>drift</strong>. Each generation diverges further from your codebase conventions, security requirements, and architectural decisions.</p>
-            <p>NAAb moves governance from the prompt layer (where it's a suggestion) to the runtime layer (where it's enforced). The AI can generate whatever it wants. <code>govern.json</code> decides what actually runs. This isn't about limiting AI &mdash; it's about giving it a sandbox with hard walls instead of soft guidelines.</p>
+            <h3>The AI drift problem nobody is solving</h3>
+            <p>Every AI coding session starts from zero. No memory of your architecture, security requirements, or banned patterns. Generation 1 looks great. Generation 10 has drifted into a different codebase. Generation 50 uses APIs that don't exist, ships stubs as "complete," and ignores your language standards.</p>
+            <p>The industry's answer is "better prompts" and "human review." Prompts are suggestions an LLM can ignore. Reviews happen days later. NAAb is the first language where governance is a <strong>runtime constraint</strong> &mdash; enforced at the same level as syntax errors. The AI generates freely. <code>govern.json</code> decides what actually executes. No hallucinated API has ever reached production through NAAb's governance layer.</p>
             <div class="drift-stats">
                 <div class="drift-stat">
                     <div class="drift-stat-value">50+</div>
@@ -1178,7 +1177,7 @@
     <div class="section-inner">
         <p class="section-label reveal">Ecosystem</p>
         <h2 class="section-title reveal">Tools built on NAAb</h2>
-        <p class="section-desc reveal">Production-ready companions that extend polyglot programming into governance, optimization, and security.</p>
+        <p class="section-desc reveal">Production-ready companions that extend governance into scanning, optimization, and data protection.</p>
 
         <div class="ecosystem-grid">
             <div class="eco-card bolo reveal">
