@@ -892,18 +892,20 @@
             <a href="https://github.com/b-macker/NAAb" class="btn btn-outline">View on GitHub</a>
         </div>
     </div>
-    <div class="hero-demo" style="position: relative; z-index: 1; margin-top: 48px; max-width: 1000px; width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);">
-        <script src="https://asciinema.org/a/lzucpUNgzDJKN2nW.js"
-            id="asciicast-lzucpUNgzDJKN2nW"
-            async
-            data-autoplay="true"
-            data-loop="true"
-            data-speed="1"
-            data-cols="90"
-            data-rows="35"
-            data-theme="monokai">
-        </script>
-    </div>
+    <div id="demo-player" class="hero-demo" style="position: relative; z-index: 1; margin-top: 48px; max-width: 1000px; width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);"></div>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/asciinema-player@3.15.1/dist/bundle/asciinema-player.css" />
+    <script src="https://cdn.jsdelivr.net/npm/asciinema-player@3.15.1/dist/bundle/asciinema-player.min.js"></script>
+    <script>
+        AsciinemaPlayer.create('demo.cast', document.getElementById('demo-player'), {
+            autoPlay: true,
+            loop: true,
+            speed: 1,
+            cols: 90,
+            rows: 35,
+            theme: 'monokai',
+            fit: 'width'
+        });
+    </script>
 </section>
 
 <!-- LANGUAGE TICKER -->
